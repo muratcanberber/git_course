@@ -18,6 +18,13 @@ app.get('/api/books', (req, res) => {
 
 // Add a book
 app.post('/api/books', (req, res) => {
+
+  if (!req.body.title || !req.body.author) {
+    return res.status(400).json({
+        error: 'Title and author are required'
+    });
+}
+
   const book = {
       id: books.length + 1,
       title: req.body.title,
